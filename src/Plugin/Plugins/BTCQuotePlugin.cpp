@@ -277,12 +277,22 @@ void BTCQuotePlugin::initHttpClient()
 
 void BTCQuotePlugin::handleWebResponse(DynamicJsonDocument& jsonDoc)
 {
-    m_relevantResponsePart = jsonDoc["bpi"]["USD"]["rate"].as<String>() + " $/BTC";
-    m_relevantResponsePart.replace(",", "'");               // beautify to european(?) standard formatting ' for 1000s
-    
-    LOG_INFO("BTC/USD to print %s", m_relevantResponsePart.c_str());
+    m_relevantResponsePart = jsonDoc["bpi"]["USD"]["rate"].as<String>();// + " $/BTC";
+    // declaring character array
+    char char_array[m_relevantResponsePart.length() + 1];
+ 
+    // copying the contents of the
+    // string to char array
+    strcpy(char_array, m_relevantResponsePart.c_str());
+ 
 
-    m_textWidget.setFormatStr(m_relevantResponsePart);
+    char *pWholeNum; // declare a ptr pointer  
+    pWholeNum = strtok(char_array, "."); // use strtok() function to separate string using comma (,) delimiter.  
+    // m_relevantResponsePart.replace(",", "'");               // beautify to european(?) standard formatting ' for 1000s
+    
+    LOG_INFO("BTC/USD to print %s", pWholeNum);
+
+    m_textWidget.setFormatStr(pWholeNum);
 }
 
 void BTCQuotePlugin::clearQueue()
