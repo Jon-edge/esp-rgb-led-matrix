@@ -207,6 +207,7 @@ private:
      * Image path within the filesystem.
      */
     static const char*      BTC_USD_IMAGE_PATH;
+    static const char* EDGE_LOGO_PATH;
     /**
      * Period in ms for requesting quotes from Server (15 Minutes) (1 for testing!)
      * This is used in case the last request to the server was successful.
@@ -227,7 +228,10 @@ private:
     String              m_relevantResponsePart;     /**< String used for the relevant part of the HTTP response. */
     AsyncHttpClient     m_client;                   /**< Asynchronous HTTP client. */
     MutexRecursive      m_mutex;                    /**< Mutex to protect against concurrent access. */
-    SimpleTimer         m_requestTimer;             /**< Timer is used for cyclic weather http request. */
+    SimpleTimer         m_requestTimer;             /**< Timer is used for cyclic weather http request. */    
+    WidgetGroup         m_logoCanvas;  
+    BitmapWidget        m_logoBitmapWidget;             
+
 
     /**
      * Defines the message types, which are necessary for HTTP client/server handling.
